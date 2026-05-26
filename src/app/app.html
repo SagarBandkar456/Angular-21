@@ -1,11 +1,13 @@
 <!-- Tut 1 interpolation -->
 <h1>{{title()}}</h1>
 <h2>{{name}}</h2>
+<hr />
 
 <!-- Tut 2 interpolcation and function -->
 <h1>{{email}}</h1>
 <h2>{{50+40+10}}</h2>
 <h2>{{getName()}}</h2>
+<hr />
 
 <!-- Tut 3 Event binding -->
 <h1>Event binding</h1>
@@ -13,6 +15,7 @@
 <span>{{count}}</span>
 <button (click)="counter('plus')">+</button>
 <!-- <button (click)="showUserName()"></button> -->
+<hr />
 
 <!-- Tut 4 Imp events -->
 <h1>Events</h1>
@@ -29,6 +32,7 @@
 <div class="div1" (mouseleave)="handleEvent($event.type)"></div>
 <br><br>
 <div class=" div2" (mouseenter)="handleEvent($event.type)"></div>
+<hr />
 
 <!-- Tut 5 Property binding -->
 <h1>Property Binding</h1>
@@ -41,7 +45,7 @@
 <input type="text" readonly="{{inputReadonly}}">
 <br><br>
 <input type="text" [readonly]="inputReadonly">
-
+<hr />
 
 <!-- Tut 6 Signals -->
 <h1>Signals</h1>
@@ -64,3 +68,41 @@
 
 <h1>Signal Data Types</h1>
 <button (click)="handleData()">show updated users</button>
+<hr />
+
+<!-- Tut 7 counter app using signals -->
+<div>
+    <h2>Counter App</h2>
+    <div>
+        {{counter1()}}
+    </div>
+
+    <div>
+        <button (click)="decrement()">-</button>
+        <button (click)="reset()">Reset</button>
+        <button (click)="increment()">+</button>
+    </div>
+</div>
+<hr />
+
+<!-- Tut 8 Get and Set using signals -->
+<p>Value: {{value1()}}</p>
+<input type="text" [value]="value1()" (input)="setValue($event.target.value)">
+<button (click)="resetValue()">Reset Value</button>
+<hr>
+
+<!-- Tut 9 Control statement -->
+<h1>Control flow statement</h1>
+<div>
+    @if (isLogin())
+    {
+    <span>welcome user</span>
+    <button (click)="handleLogin(false)">Logout</button>
+    } @else {
+    <span>Please login</span>
+    <button (click)="handleLogin(true)">Login</button>
+    }
+</div>
+
+
+<hr>

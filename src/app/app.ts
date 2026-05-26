@@ -1,6 +1,7 @@
 import { Component, computed, effect, Signal, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { log } from 'console';
+import { single } from 'rxjs';
 import { Writable } from 'stream';
 
 @Component({
@@ -104,7 +105,40 @@ export class App {
     this.data1.set("raj");
     this.users.update((item) => [...item, 'johson'])
     console.log(this.users());
-
   }
 
+  // Tut 7 counter app using signals
+
+  counter1: WritableSignal<number> = signal<number>(0);
+
+  increment() {
+    this.counter1.update((val) => val + 1);
+  }
+
+  decrement() {
+    if (this.counter1() > 0) this.counter1.update((val) => val - 1);
+  }
+
+  reset() {
+    this.counter1.set(0);
+  }
+
+  // Tut 8 Get and Set using signals
+  value1: WritableSignal<string> = signal<string>('')
+
+  resetValue() {
+    this.value1.set("Sagar Bandkar")
+  }
+
+  setValue(val: string) {
+    this.value1.set(val);
+  }
+
+  // Tut 9 Control statement
+  isLogin = signal(true);
+  
+
+  handleLogin(isLogin: boolean) {
+    this.isLogin.set(isLogin);
+  }
 }
