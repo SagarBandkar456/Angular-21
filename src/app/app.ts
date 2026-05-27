@@ -1,4 +1,5 @@
 import { Component, computed, effect, Signal, signal, WritableSignal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { log } from 'console';
 import { single } from 'rxjs';
@@ -6,7 +7,7 @@ import { Writable } from 'stream';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, FormsModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -141,4 +142,18 @@ export class App {
   handleLogin(isLogin: boolean) {
     this.isLogin.set(isLogin);
   }
+
+  users1 = signal(["anil", "sam", "peter", "sagar"]);
+  usersDetails = signal([
+    { id: 1, name: "sagar", sirname: "bandkar", email: "sagarbndkr@gmail.com" },
+    { id: 2, name: "sam", sirname: "singh", email: "samsingh@gmail.com" },
+    { id: 3, name: "peter", sirname: "parker", email: "peterparker@gmail.com" },
+    { id: 4, name: "bruce", sirname: "wayne", email: "brucewayne@gmail.com" }
+  ])
+
+  status = signal('Loading')
+
+  // Tut 10 Two way data binding
+  name1 = signal('sagar bandkar');
+  age = 20;
 }

@@ -92,7 +92,7 @@
 <hr>
 
 <!-- Tut 9 Control statement -->
-<h1>Control flow statement</h1>
+<h1>if | Control flow statement</h1>
 <div>
     @if (isLogin())
     {
@@ -103,6 +103,53 @@
     <button (click)="handleLogin(true)">Login</button>
     }
 </div>
-
-
 <hr>
+
+<h1>for | Control flow statement</h1>
+<div>
+    <ul>
+        @for (user of users1(); track user) {
+        <li>{{user}}</li>
+        }
+    </ul>
+</div>
+<hr>
+
+<div>
+    <ul>
+        @for (user of usersDetails(); track user.id) {
+        <li [style.backgroundColor]="$odd?'#ccc':'#'">
+            <span>
+                {{user.id}} {{user.name+" "+user.sirname}}
+                @if($first){ <span style="color:blue">Admin</span> }
+                @if($last){ <span style="color:red">Guest</span> }
+            </span>
+        </li>
+        }
+    </ul>
+</div>
+<hr>
+<h1>switch | Control flow statement</h1>
+<div>
+    @switch (status()) {
+    @case ('NotStarted') {
+    <span>No update yet</span>
+    }
+    @case ('Loading') {
+    <span style="color: orange;">Loading</span>
+    }
+    @case ('Success') {
+    <span style="color: green">Success</span>
+    }
+    @default {
+    <span style="color: red;">Default</span>
+    }
+    }
+</div>
+<hr>
+<!-- Tut 10 Two way data binding -->
+<h1>{{name1()}}</h1>
+<input type="text" [value]="name1()" (input)="name1.set($event.target.value)">
+<hr>
+<h1>{{age}}</h1>
+<input type="text" [value]="age" [(ngModel)]="age">
