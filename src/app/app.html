@@ -147,9 +147,26 @@
     }
 </div>
 <hr>
+
 <!-- Tut 10 Two way data binding -->
 <h1>{{name1()}}</h1>
 <input type="text" [value]="name1()" (input)="name1.set($event.target.value)">
 <hr>
 <h1>{{age}}</h1>
 <input type="text" [value]="age" [(ngModel)]="age">
+<hr>
+
+<!-- Tut 11 Getter and Setter for signals -->
+<h1>{{uName}}</h1>
+<input type="text" [(ngModel)]="uName">
+<hr>
+<h2>{{userData().college}}</h2>
+<input type="text" [(ngModel)]="userCollege">
+
+<!-- Tut 12 ToDo list with signals -->
+<h1>TODO list</h1>
+<ul>
+    @for (task of task(); track task.id) {
+    <li>{{task.title}}</li>
+    }
+</ul>

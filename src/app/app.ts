@@ -156,4 +156,30 @@ export class App {
   // Tut 10 Two way data binding
   name1 = signal('sagar bandkar');
   age = 20;
+
+  // Tut 11 Getter and Setter for signals
+  userName = signal('Sagar Bandkar')
+  userData = signal({
+    college: 'VIT',
+    email: 'sagarbndkr@gmail.com'
+  })
+
+  get uName() {
+    return this.userName()
+  }
+
+  set uName(val: string) {
+    this.userName.set(val)
+  }
+
+  get userCollege() {
+    return this.userData().college;
+  }
+
+  set userCollege(val: string) {
+    this.userData.update((item) => ({...item, college: val}));
+  }
+
+  // Tut 12 ToDo list with signals
+  task = signal([{id:0,title:'Team lunch',completed:false}])
 }
