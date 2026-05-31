@@ -170,3 +170,14 @@
     <li>{{task.title}}</li>
     }
 </ul>
+<hr>
+
+<!-- Tut 13 Parent to Child -->
+<app-child [userName1]="userName1()"></app-child>
+<app-child [userName1]="'Raj'"></app-child>
+<app-child [userName1]="'Max'"></app-child>
+<app-child [userName1]="'Bob'"></app-child>
+
+<!-- Tut 13 Child to Parent -->
+<app-child (onMessageSent)="handleData1($event)"></app-child>
+<h1>Message Received:{{parentData()}}</h1>

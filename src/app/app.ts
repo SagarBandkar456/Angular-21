@@ -1,13 +1,12 @@
 import { Component, computed, effect, Signal, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { log } from 'console';
-import { single } from 'rxjs';
-import { Writable } from 'stream';
+import { Child } from './child/child';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule],
+  standalone: true,
+  imports: [RouterOutlet, FormsModule, Child],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -181,5 +180,17 @@ export class App {
   }
 
   // Tut 12 ToDo list with signals
-  task = signal([{id:0,title:'Team lunch',completed:false}])
+  task = signal([{ id: 0, title: 'Team lunch', completed: false }])
+
+
+  // Tut 13 Parent to Child 
+  userName1 = signal("Sagar Bandkar")
+
+  // Tut 13 Child to Parent
+  parentData = signal('');
+
+  handleData1(message: string) {
+    this.parentData.set(message);
+  }
+
 }
