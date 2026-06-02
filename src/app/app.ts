@@ -2,11 +2,15 @@ import { Component, computed, effect, Signal, signal, WritableSignal } from '@an
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { Child } from './child/child';
+import { DisplayCount } from "./display-count/display-count";
+import { ControlCount } from './control-count/control-count';
+import { CommonModule } from '@angular/common';
+import { TrimTextPipe } from './pipe/trim-text-pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, Child],
+  imports: [RouterOutlet, FormsModule, Child, DisplayCount, ControlCount, CommonModule, TrimTextPipe],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -193,4 +197,16 @@ export class App {
     this.parentData.set(message);
   }
 
+  // Tut 14 Pipes
+
+  title1 = "Sagar Bandkar";
+  name2 = signal("");
+
+  date = "02-06-2026";
+  amount = "25000";
+  mobile = "samsung";
+
+  userDetail = signal({ name: 'sagar', age: 32, email: 'sagarbndkr@gmail.com' });
+
+  title2 = signal("hello world");
 }

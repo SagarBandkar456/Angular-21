@@ -181,3 +181,23 @@
 <!-- Tut 13 Child to Parent -->
 <app-child (onMessageSent)="handleData1($event)"></app-child>
 <h1>Message Received:{{parentData()}}</h1>
+<hr>
+
+<!-- Tut 14 Global state with signal -->
+<h1>Global state with signal</h1>
+<app-display-count></app-display-count>
+<hr>
+<app-control-count></app-control-count>
+<hr>
+
+<!-- Tut 14 Pipes -->
+<h1>{{title1 | uppercase}}</h1>
+<h1>{{title1 | titlecase}}</h1>
+<h1>{{name2()| titlecase}}</h1>
+<input type="text" (input)="name2.set($event.target.value)">
+
+<h1>I bought a {{mobile | titlecase}} mobile on {{date | date:'short'}} for {{amount | currency:'USD'}}</h1>
+
+<h2>{{userDetail()|json}}</h2>
+<h2>{{title2() | trimText}}</h2>
+<h2>{{title2() | trimText:2 | uppercase}}</h2>
