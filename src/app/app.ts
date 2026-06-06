@@ -1,16 +1,18 @@
-import { Component, computed, effect, Signal, signal, WritableSignal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, computed, effect, Signal, signal, ViewChild, viewChild, ViewContainerRef, WritableSignal } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { Child } from './child/child';
 import { DisplayCount } from "./display-count/display-count";
 import { ControlCount } from './control-count/control-count';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { TrimTextPipe } from './pipe/trim-text-pipe';
+import { UserDetails } from './user-details/user-details';
+import { log } from 'console';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, Child, DisplayCount, ControlCount, CommonModule, TrimTextPipe],
+  imports: [RouterOutlet, FormsModule, Child, DisplayCount, ControlCount, CommonModule, TrimTextPipe, UserDetails, ReactiveFormsModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -209,4 +211,53 @@ export class App {
   userDetail = signal({ name: 'sagar', age: 32, email: 'sagarbndkr@gmail.com' });
 
   title2 = signal("hello world");
+
+  // Tut 15 Dynamic component
+  @ViewChild("container", { read: ViewContainerRef })
+  container: ViewContainerRef | undefined;
+
+  async loadUserDetails() {
+    this.container?.clear();
+    const { UserDetails } = await import('./user-details/user-details');
+    this.container?.createComponent(UserDetails);
+  }
+
+  // Tut 16 Reactive form
+
+  email1 = new FormControl("");
+  password = new FormControl("");
+
+  login() {
+    console.log(this.email1.value + " " + this.password.value);
+  }
+
+  loginForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(5)])
+  });
+
+  get getName1() {
+    return this.loginForm.get('name');
+  }
+
+  get getEmail() {
+    return this.loginForm.get('email');
+  }
+
+  get getPassword() {
+    return this.loginForm.get('password');
+  }
+
+  handleProfile() {
+    console.log(this.loginForm.value);
+  }
+
+  // Tut 16 Template driven form
+
+  addUser(data: NgForm) {
+    console.log(data);
+
+  }
 }
+

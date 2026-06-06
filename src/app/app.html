@@ -201,3 +201,73 @@
 <h2>{{userDetail()|json}}</h2>
 <h2>{{title2() | trimText}}</h2>
 <h2>{{title2() | trimText:2 | uppercase}}</h2>
+<hr>
+
+<!-- Tut 15 Dynamic component -->
+<button (click)="loadUserDetails()">Load user details</button>
+<ng-container #container></ng-container>
+<hr>
+
+<!-- Tut 16 Reactive form -->
+<h1>Reactive Form</h1>
+<input type="text" placeholder="Enter email" [formControl]="email1" />
+<br><br>
+<input type="password" placeholder="Enter password" [formControl]="password" />
+<br><br>
+<button (click)="login()">Login</button>
+<hr>
+
+<h1>Reactive Form</h1>
+<form method="post" [formGroup]="loginForm" (ngSubmit)="handleProfile()">
+    <input type="text" placeholder="Enter name" formControlName="name" />
+    @if(getName1?.hasError('required') && getName1?.touched){
+    <span class="error">This name field is required</span>
+    }
+    <br><br>
+    <input type="text" placeholder="Enter email" formControlName="email" />
+    @if(getEmail?.hasError('required') && getEmail?.touched){
+    <span class="error">This email field is required</span>
+    }
+    @if(getEmail?.errors?.['email'] && getEmail?.touched){
+    <span class="error">This email field is not valid</span>
+    }
+    <br><br>
+    <input type="password" placeholder="Enter password" formControlName="password" />
+    @if(getPassword?.hasError('required') && getPassword?.touched){
+    <span class="error">This password field is required</span>
+    }
+    @if(getPassword?.errors?.['minlength'] && getPassword?.touched){
+    <span class="error">This email field is not valid</span>
+    }
+    <br><br>
+    <button>Submit</button>
+</form>
+<hr>
+
+<!-- Tut 16 Template driven form -->
+<h1>Template driven form</h1>
+<form #userForm="ngForm" (ngSubmit)="addUser(userForm.value)">
+
+    <input type="text" placeholder="Enter user name" name="username" ngModel>
+    <br><br>
+
+    <input type="password" placeholder="Enter password" name="password" ngModel>
+    <br><br>
+
+    <select name="gender" ngModel>
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+    <br><br>
+
+    <input type="range" name="range" ngModel>
+    <br><br>
+
+    <textarea name="userbio" ngModel>
+    </textarea>
+    <br><br>
+
+    <button type="submit">Add User</button>
+
+</form>
