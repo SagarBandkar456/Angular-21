@@ -1,4 +1,4 @@
-import { Component, computed, effect, Signal, signal, ViewChild, viewChild, ViewContainerRef, WritableSignal } from '@angular/core';
+import { Component, computed, effect, OnInit, Signal, signal, ViewChild, viewChild, ViewContainerRef, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { Child } from './child/child';
@@ -8,6 +8,9 @@ import { CommonModule, NgFor } from '@angular/common';
 import { TrimTextPipe } from './pipe/trim-text-pipe';
 import { UserDetails } from './user-details/user-details';
 import { log } from 'console';
+import { of } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
+import { ProductService } from './services/product-service';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +19,9 @@ import { log } from 'console';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements OnInit {
 
-  constructor() {
+  constructor(private productService: ProductService) {
     effect(() => {
       console.log('This is value', this.value());
       if (this.value() == 110) {
@@ -33,6 +36,13 @@ export class App {
       console.log(this.fruit());
     })
   }
+
+  ngOnInit() {
+    this.productService.getProduct().subscribe((data) => {
+      console.log(data);
+    })
+  }
+
   // Tut 1 interpolation
   protected readonly title = signal('Angular21');
   name: string = "Sagar Bandkar"
@@ -259,5 +269,23 @@ export class App {
     console.log(data);
 
   }
+
+  // Tut 17 RXJS operator
+  rxjsSubscription = of(1, 2, 3, 4, 5).pipe(
+    map((a: number) => a * 1000)
+  ).subscribe(console.log);
+
+
+  filter = of(1, 2, 3, 4, 5).pipe(
+    filter(a => a % 2 == 0)
+  ).subscribe(console.log);
+
+  tap$ = of('Angualr', 'react', 'vue').pipe(
+    tap(d => console.log(tap))).subscribe(console.log);
+
+
+
+
+
 }
 
